@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "algorithm": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "istream": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "limits": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
+    }
+}

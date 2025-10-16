@@ -1,0 +1,1 @@
+each containing a number of occurrences of an event associated with its bin.
