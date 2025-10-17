@@ -99,6 +99,7 @@ public:
         cin >> f;
         films.push_back(f);
     }
+    //Add film in main function code Overloaded Function
     void addFilm(string n, string d, string dat) { films.emplace_back(n, d, dat); }
     void addSong()
     {
@@ -110,42 +111,44 @@ public:
     // Removing different types of records
     void removeFilm()
     {
-        cout << "Enter film number to remove: ";
+        showFilms();
+        cout << "\nEnter film number to remove: ";
         int num;
         while (!(cin >> num))
         {                                                        // Try reading an int
             cin.clear();                                         // Clear error state
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore bad input
-            cout << "Invalid input\n Try Again: ";
+            cout << "\033[31mInvalid input\nTry Again: \033[0m";
         }
         if (num > 0 && num <= films.size())
         {
             films.erase(films.begin() + num - 1);
-            cout << "\nFilm Removed";
+            cout << "\n\033[32mFilm Removed\033[0m";
         }
         else
         {
-            cout << "Invalid index!\n";
+            cout << "\033[31mInvalid index!\033[0m\n";
         }
     }
     void removeSong()
     {
-        cout << "Enter song number to remove: ";
+        showSongs();
+        cout << "\nEnter song number to remove: ";
         int num;
         while (!(cin >> num))
         {                                                        // Try reading an int
             cin.clear();                                         // Clear error state
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore bad input
-            cout << "Invalid input\n Try Again: ";
+            cout << "\033[31mInvalid input\nTry Again: \033[0m";
         }
         if (num > 0 && num <= songs.size())
         {
             songs.erase(songs.begin() + num - 1);
-            cout << "\nSong Removed";
+            cout << "\n\033[32mSong Removed\033[0m";
         }
         else
         {
-            cout << "Invalid index!\n";
+            cout << "\033[31mInvalid index!\033[0m\n";
         }
     }
     // Outputting to Console
@@ -178,7 +181,7 @@ public:
             songsOut << s << endl;
         }
         songsOut.close();
-        cout << "\nSaved Records";
+        cout << "\n\033[32mSaved Records\033[0m";
     }
     // Inputting from files
     void inFromFile(const string &filmFile, const string &songFile)
@@ -222,7 +225,7 @@ int main()
 
     while (true)
     {
-        cout << "\n--- Actions Menu (Enter 0-9) ---\n"
+        cout << "\n\033[33m--- Actions Menu (Enter 0-9) ---\033[0m\n"
              << "1. Display Films 2. Display Songs\n"
              << "3. Add Film      4. Add Song\n"
              << "5. Remove Film   6. Remove Song\n"
@@ -237,7 +240,7 @@ int main()
         switch (choice)
         {
         case 0:
-            cout << "\n > Exiting...";
+            cout << "\n\033[31m > Exiting...\033[0m";
             return 0;
         case 1:
             records.showFilms();
@@ -266,7 +269,7 @@ int main()
             records.outToFile("Films.txt", "Songs.txt");
             break;
         default:
-            cout << "\n > Not Valid Choice\n";
+            cout << "\n\033[31m > Not Valid Choice\033[0m\n";
             break;
         }
     }

@@ -19,33 +19,40 @@ public:
         right = left + width_;  // x2
         bottom = top + height_; // y2
     }
-    Rectangle intersection(const Rectangle &other) const
+    void intersection(const Rectangle &otherRect) const
     {
-        int farthestRight = std::max(left, other.left);//Left
-        int lowestTop = std::max(top, other.top);//Top
-        int closestLeft = std::min(right, other.right);//Right
-        int highestBottom = std::min(bottom, other.bottom);//Bottom
+        int farthestRight = max(left, otherRect.left);     // Left
+        int lowestTop = max(top, otherRect.top);           // Top
+        int closestLeft = min(right, otherRect.right);     // Right
+        int highestBottom = min(bottom, otherRect.bottom); // Bottom
 
-        // Check if rectangles actually overlap
+        // Check if rectangles overlap
         if (farthestRight < closestLeft && lowestTop < highestBottom)
-            return Rectangle(farthestRight, lowestTop, closestLeft-farthestRight, highestBottom-lowestTop); // intersection rectangle
+        {
+            Rectangle rectI(farthestRight, lowestTop, closestLeft - farthestRight, highestBottom - lowestTop); // intersection rectangle
+            rectI.displayRect();
+        }
         else
-            return Rectangle(0, 0, 0, 0); // no intersection
+        {
+            cout << "No Intersection\n";
+        }
     }
-    void print() const
+    void displayRect()
     {
         cout << "Rectangle from (" << left << ", " << top << ") to ("
              << right << ", " << bottom << ")" << endl;
     }
-    bool checkPoint(int x, int y)
+    void checkPoint(int x, int y)
     {
         if (x >= left && x <= right && y >= top && y <= bottom)
         {
-            return true;
+            cout << "\n\033[32mIs Inside Rectangle\033[0m";
+            // return true;
         }
         else
         {
-            return false;
+            cout << "\n\033[31mIs Outside Rectangle\033[0m";
+            // return false;
         }
     }
 };
@@ -53,12 +60,13 @@ public:
 int main()
 {
     Rectangle r1(0, 0, 5, 5);
+    r1.displayRect();
     Rectangle r2(4, 4, 7, 2);
-    cout << "\nIntersection of r1 and r2:\n";
-    Rectangle inter12 = r1.intersection(r2);
-    inter12.print();
+    r2.displayRect();
+    cout << "\n\033[33mIntersection of r1 and r2:\033[0m\n";
+    r1.intersection(r2);
 
-    cout << (r1.checkPoint(3, 4) ? "\nIs Inside Rectangle" : "\nIs Outside Rectangle");
-    cout << (r2.checkPoint(2, 3) ? "\nIs Inside Rectangle" : "\nIs Outside Rectangle");
+    r1.checkPoint(3, 4);
+    r2.checkPoint(2, 3);
     return 0;
 }
